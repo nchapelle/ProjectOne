@@ -23,7 +23,7 @@ var nameBox = $("<input>")
   usersOnline = $("<div>")
     .attr("class", "online-users")
     .text("Online users: ")
-    .appendTo(".chatbox"),
+    .appendTo(".chatbox-data"),
   spanIcon = $("<span>")
     .attr({
       class: "glyphicon glyphicon-user",
