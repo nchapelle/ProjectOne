@@ -5,12 +5,30 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="./assets/js/sphere-hacked.js"></script>
+    <script
+      type="text/javascript"
+      src="./assets/js/jquery.earth-3d.js"
+    ></script>
+    <script type="text/javascript" src="./assets/js/globe.js"></script>
+
+    <script
+      type="text/javascript"
+      src="./assets/js/requestanimationframe.polyfill.js"
+    ></script>
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+  />
+
+<link rel="stylesheet" href="./assets/css/globe.css"/>
     <style>
       /* Remove the navbar's default rounded borders and increase the bottom margin */
       .navbar {
@@ -70,6 +88,18 @@
       </div>
     </div>
   </div>
+        <p>Pick your final resting place</p>
+        <div class="globe">
+          <div id="showoff">
+            <div id="container">
+              <canvas id="sphere" width="400" height="400"></canvas>
+              <div id="glow-shadows" class="earth"></div>
+              <div id="locations"></div>
+            </div>        
+  </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-sm-4">
@@ -96,6 +126,7 @@
                 style="width:100%"
                 alt="Image"
               />
+              IM THE BODY BITCH!
             </div>
             <div class="panel-footer">Data goes here.</div>
           </div>
@@ -112,6 +143,8 @@
               />
             </div>
             <div class="panel-footer">Data goes here.</div>
+            <div class="panel-body chatbox"></div>
+            <div class="panel-footer chatbox-data"></div>
           </div>
         </div>
       </div>
@@ -131,3 +164,7 @@
         <button type="button" class="btn btn-dark">Sign Up</button>
       </form>
     </footer>
+    </footer>
+    <script src="./assets/js/chat.js"></script>
+  </body>
+</html>
