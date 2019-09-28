@@ -27,6 +27,8 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
   />
 
+  <script type="text/javascript" src="./assets/js/weather.js"></script>
+
 <link rel="stylesheet" href="./assets/css/globe.css"/>
     <style>
       /* Remove the navbar's default rounded borders and increase the bottom margin */
@@ -100,7 +102,7 @@
         <div class="col-sm-4">
           <div class="panel panel-primary">
             <div class="panel-heading">Weather</div>
-            <div class="panel-body">
+            <div class="panel-body" id="imageHolder">
               <img
                 src="https://placehold.it/150x80?text=IMAGE"
                 class="img-responsive"
@@ -108,7 +110,7 @@
                 alt="Image"
               />
             </div>
-            <div class="panel-footer">Data goes here.</div>
+            <div class="panel-footer" id="weatherTemp">Data goes here.</div>
           </div>
         </div>
         <div class="col-sm-4">
