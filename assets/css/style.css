@@ -1,0 +1,68 @@
+body {
+  font: 18px arial, sans-serif;
+  background: white;
+}
+
+.modal-body {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.scroll-tree {
+  width: 5000px;
+}
+#show-group {
+  width: 70%;
+}
+
+.button-result {
+  float: left;
+  padding: 2px;
+}
+#show-group {
+  width: 675px;
+  height: 110px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  /* border: black solid 2px; */
+}
+#button-view {
+  display: inline-block;
+}
+
+form {
+  /* float: right; */
+  width: 30%;
+  padding: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+input[type="text"] {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+button,
+input[type="submit"] {
+  padding: 5px 20px;
+  margin: 0 10px 10px 0;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+  background: grey;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px #bbb;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: #6b6b73;
+}
