@@ -12,7 +12,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <!-- css -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./assets/css/globe.css"/>
+<!-- <link rel="stylesheet" href="./assets/css/style.css"/> -->
+
 </head>
 <body>
     <!-- Button trigger modal -->
@@ -24,8 +26,15 @@
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+            <div class="modal-header"><form>
+              <br>
+              <label type="text" placeholder="Add a Button!" > </label>
+               <!-- Submit button for new show to be added -->
+               <input type="text" id="add-btn"> <br>
+              <button id="new-btn" class="btn btn-primary" type="submit"> Submit</button>
+            </form>
+
+              <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -33,16 +42,9 @@
             <div class="modal-body">
                     <div class="scroll-tree">
                         <div class="list-group" ng-repeat="item in items">
-                            <a clsss="list-group-item" id="show-group" href="javascript:void(0);" ng-click="getChildren(item)">{{item.value}}</a>
+                            <a clsss="list-group-item" id="show-group" href="javascript:void(0);" ng-click="getChildren(item)"><div id="gifHolder"></div></a>
                         </div>
                             </div>
-                    <form>
-                            <br>
-                            <label type="text" placeholder="Add a Button!" > </label>
-                             <!-- Submit button for new show to be added -->
-                             <input type="text" id="add-btn"> <br>
-                            <button id="new-btn" class="btn btn-primary" type="submit"> Submit</button>
-                          </form>
                           <!-- where gifs will go  -->
 <br>
 <div id="button-view"></div>
@@ -56,6 +58,6 @@
           </div>
         </div>
       </div>
-      <script src="gifs.js" type="text/javascript"></script> 
+      <script src="./assets/js/gifs.js" type="text/javascript"></script> 
 </body>
 </html>
