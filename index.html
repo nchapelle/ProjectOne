@@ -4,13 +4,12 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="./assets/js/sphere-hacked.js"></script>
     
     
@@ -24,6 +23,8 @@
       type="text/javascript"
       src="./assets/js/requestanimationframe.polyfill.js"
     ></script>
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
     <link
     rel="stylesheet"
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
@@ -66,7 +67,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">We the Best</a>
+          <a class="navbar-brand" id="highScore"></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
@@ -124,12 +125,50 @@
 
             <div class="panel-heading text-center chatHead">Chatbox</div>
             <div class="panel-body chatbox"></div>
-            <div class="panel-footer text-center chatbox-data"></div>
+            <div class="panel-footer text-center chatbox-data"><div id="dialog-form" title="Create new user">
+              <p class="validateTips">All form fields are required.</p>
+             
+              <form>
+                <fieldset>
+                  <label for="name">Name</label>
+                  <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                  <label for="email">Email</label>
+                  <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+                  <label for="password">Password</label>
+                  <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+             
+                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+              </form>
+            </div>
+            <button id="create-user">Create new user</button>
+          <script src="./assets/js/dialog.js"></script></div>
           </div>
         </div>
       </div>
     </div>
     <br /><br />
+    <div id="users-contain" class="ui-widget">
+      <h1>Existing Users:</h1>
+      <table id="users" class="ui-widget ui-widget-content">
+        <thead>
+          <tr class="ui-widget-header ">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>john.doe@example.com</td>
+            <td>johndoe1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
 
     <footer class="container-fluid text-center">
       <p>BAMN</p>
