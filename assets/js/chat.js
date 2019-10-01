@@ -1,3 +1,21 @@
+$(function() {
+  $("#dialog-2").dialog({
+    autoOpen: false,
+    buttons: {
+      OK: function() {
+        $(this).dialog("close");
+      }
+    },
+    title: "Success",
+    position: {
+      my: "left center",
+      at: "left center"
+    }
+  });
+  $("#opener-2").click(function() {
+    $("#dialog-2").dialog("open");
+  });
+});
 var nameBox = $("<input>")
     .attr({
       type: "text",

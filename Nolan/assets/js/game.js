@@ -1,14 +1,13 @@
 var highscore = 15;
 var danger = 0;
-var countdown = 150;
+var countdown = 15;
 var roundScore = 0;
 var intervalId;
-var threat = 1;
 //on load
 var time = {
   run: function() {
     clearInterval(intervalId);
-    intervalId = setInterval(time.decrement, 1000 * threat);
+    intervalId = setInterval(time.decrement, 1000);
   },
   stop: function() {
     clearInterval(intervalId);
@@ -25,7 +24,7 @@ var time = {
       var dragonGO = $("<img>");
       dragonGO.attr("src", dragon.images[1]);
       dragonGO.attr("id", "game-over");
-      // $("#dragon").empty();
+      $("#dragon").empty();
       $(".jumbotron").empty();
       time.stop();
       roundScore = 0;
@@ -139,7 +138,7 @@ var treasurePile = {
     "Jewelry fit for royalty."
   ],
   action: ["Leave", "Min Gain", "Med Gain", "Max Gain"],
-  aggravation: [0, 0.05, 0.1, 0.2],
+  danger: 0,
   lootPiles: function() {
     var lootBox = $("<div>");
     lootBox.addClass("lootBox");
@@ -196,7 +195,7 @@ var treasurePile = {
               "New High Score. Take a Screenshot! High Score: " + highscore
             );
             $(".jumbotron").empty();
-            // $("#dragon").empty();
+            $("#dragon").empty();
             roundScore = 0;
             choices.startGame();
           }, 100);
@@ -218,7 +217,7 @@ var treasurePile = {
               "You escaped with your treasures. Your score is: " + roundScore
             );
             $(".jumbotron").empty();
-            $("#dragon").empty();
+            // $("#dragon").empty();
             roundScore = 0;
             choices.startGame();
             // choices.startGame(); //this is now buried within the scope of the second click event
