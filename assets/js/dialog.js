@@ -1,14 +1,11 @@
+var userName;
 $(function() {
   var dialog,
     form,
-    // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-    emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
     name = $("#name"),
-    email = $("#email"),
     password = $("#password"),
     allFields = $([])
       .add(name)
-      .add(email)
       .add(password),
     tips = $(".validateTips");
 
@@ -46,7 +43,6 @@ $(function() {
     allFields.removeClass("ui-state-error");
 
     valid = valid && checkLength(name, "username", 3, 16);
-    valid = valid && checkLength(email, "email", 6, 80);
     valid = valid && checkLength(password, "password", 5, 16);
 
     valid =
@@ -56,7 +52,6 @@ $(function() {
         /^[a-z]([0-9a-z_\s])+$/i,
         "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter."
       );
-    valid = valid && checkRegexp(email, emailRegex, "eg. ui@jquery.com");
     valid =
       valid &&
       checkRegexp(
@@ -66,31 +61,42 @@ $(function() {
       );
 
     if (valid) {
-      $("#users tbody").append(
-        "<tr>" +
-          "<td>" +
-          name.val() +
-          "</td>" +
-          "<td>" +
-          email.val() +
-          "</td>" +
-          "<td>" +
-          password.val() +
-          "</td>" +
-          "</tr>"
-      );
-      dialog.dialog("close");
+      database.ref("/accts").push({ un: name.val(), pw: password.val() });
+      userName = name.val();
+      ref
+        .orderByChild("email")
+        .equalTo(userName)
+        .on("value", function(snapshot) {
+          snapshot.forEach(function(child) {
+            console.log(child.key);
+          });
+        });
+      database.ref("/accts").on("child_added", function(snapshot) {
+        var data = snapshot.parent.val();
+        console.log(data);
+        $("#users tbody").append(
+          "<tr>" +
+            "<td>" +
+            name.val() +
+            "</td>" +
+            "<td>" +
+            password.val() +
+            "</td>" +
+            "</tr>"
+        );
+        dialog.dialog("close");
+      });
+      return valid;
     }
-    return valid;
   }
 
   dialog = $("#dialog-form").dialog({
-    autoOpen: false,
+    autoOpen: true,
     height: 400,
     width: 350,
     modal: true,
     buttons: {
-      "Create an account": addUser,
+      "Create account": addUser,
       Cancel: function() {
         dialog.dialog("close");
       }
