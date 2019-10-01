@@ -2,8 +2,9 @@ html {
   font-size: 16px;
 }
 .chatbox {
-  overflow: auto;
+  overflow-x: auto;
   max-height: 15rem;
+  word-wrap: break-word;
 }
 #showoff {
   align-self: center;
