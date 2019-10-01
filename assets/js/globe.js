@@ -6,32 +6,32 @@ var locations = {
   obj1: {
     alpha: 0.55,
     delta: -0.23,
-    name: "Philadelphia!"
+    name: "Philadelphia"
   },
   obj2: {
     alpha: 0.8,
     delta: -2.4,
-    name: "Kuwait!"
+    name: "Kuwait"
   },
   obj3: {
     alpha: 0.1,
     delta: 0.7,
-    name: "Alaska!"
+    name: "Alaska"
   },
   obj4: {
     alpha: (3 * Math.PI) / 4,
     delta: (3 * Math.PI) / 4,
-    name: "Land down under"
+    name: "Australia"
   },
   obj5: {
     alpha: 1.75,
     delta: 0.86,
-    name: "Ocean!"
+    name: "Hawaii"
   },
   obj6: {
     alpha: 0.4,
     delta: 2.7,
-    name: "Mother Russia"
+    name: "Russia"
   }
 };
 $(document).ready(() => {
