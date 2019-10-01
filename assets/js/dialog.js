@@ -63,14 +63,9 @@ $(function() {
     if (valid) {
       userName = name.val();
       var accountRef = database.ref("/accts");
-      var userNameRef = database.ref("/accts/un");
-      if (userNameRef.equalTo(userName)) {
-        updateTips("Failed, Account Already Exists!");
-      } else {
-        accountRef.push({ un: name.val(), pw: password.val() });
-        dialog.dialog("close");
-        return valid;
-      }
+      accountRef.push({ un: userName, pw: password.val() });
+      dialog.dialog("close");
+      return valid;
     }
   }
 
