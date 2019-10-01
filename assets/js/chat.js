@@ -5,7 +5,7 @@ var nameBox = $("<input>")
       class: "form-control",
       placeholder: "enter a username"
     })
-    .appendTo(".chatbox"),
+    .appendTo(".chatHead"),
   chatBox = $("<ul>")
     .attr({
       id: "messages",
@@ -19,7 +19,7 @@ var nameBox = $("<input>")
       class: "form-control",
       placeholder: "type a message ... press [ENTER] to send"
     })
-    .appendTo(".chatbox"),
+    .appendTo(".chatbox-data"),
   usersOnline = $("<div>")
     .attr("class", "online-users")
     .text("Online users: ")
