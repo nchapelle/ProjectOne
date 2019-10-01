@@ -30,7 +30,7 @@ var time = {
       roundScore = 0;
       danger = 0;
       countdown = 15;
-      $("#dragon").append(dragonGO);
+      $(".jumbotron").append(dragonGO);
       $("#game-over").on("click", function() {
         $("#dragon").empty();
         $(".jumbotron").empty();
@@ -47,7 +47,10 @@ var dragon = {
     dragonImg.addClass("col");
     dragonImg.attr("src", dragon.images[0]);
     dragonImg.attr("id", "heKnows");
-    $("#dragon").append(dragonImg);
+    $(".jumbotron").append(dragonImg);
+    $("#heKnows").on("click", function() {
+      treasurePile.lootPiles();
+    });
   },
 
   checkRound: function() {

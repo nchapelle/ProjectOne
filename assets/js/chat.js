@@ -5,7 +5,7 @@ var nameBox = $("<input>")
       class: "form-control",
       placeholder: "enter a username"
     })
-    .appendTo(".chatbox"),
+    .appendTo(".chatHead"),
   chatBox = $("<ul>")
     .attr({
       id: "messages",
@@ -19,7 +19,7 @@ var nameBox = $("<input>")
       class: "form-control",
       placeholder: "type a message ... press [ENTER] to send"
     })
-    .appendTo(".chatbox"),
+    .appendTo(".chatbox-data"),
   usersOnline = $("<div>")
     .attr("class", "online-users")
     .text("Online users: ")
@@ -32,13 +32,13 @@ var nameBox = $("<input>")
     .appendTo(usersOnline);
 
 var firebaseConfig = {
-  apiKey: "AIzaSyCszCiGMtbfQW3xaAstweYKbib82r0WZF0",
-  authDomain: "simple-chat-app-5aaa9.firebaseapp.com",
-  databaseURL: "https://simple-chat-app-5aaa9.firebaseio.com",
-  projectId: "simple-chat-app-5aaa9",
+  apiKey: "AIzaSyCP2EsdbUYFADOxHdrn3u_fyBpN_Lh8kpY",
+  authDomain: "upbc-projectone.firebaseapp.com",
+  databaseURL: "https://upbc-projectone.firebaseio.com",
+  projectId: "upbc-projectone",
   storageBucket: "",
-  messagingSenderId: "556619862197",
-  appId: "1:556619862197:web:bbf2cefddac59566122efc"
+  messagingSenderId: "74907588730",
+  appId: "1:74907588730:web:38a07f740689c06ea283c3"
 };
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();

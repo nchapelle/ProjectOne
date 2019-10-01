@@ -171,6 +171,8 @@ var earth3d;
         $elem.appendTo(widget.options.locationsElement);
         $elem.click(function() {
           alert("Clicked on " + location.name);
+          callWeatherAPI(location.name);
+          console.log(location.name);
         });
         location.$element = $elem;
       },
