@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- CSS LINKS #START# -->
-    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-         rel = "stylesheet">
     <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-  />
-    <link rel="stylesheet" href="./assets/css/globe.css"/>
+      href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/globe.css" />
     <!-- CSS LINKS #END# -->
 
     <!-- JAVASCRIPT LINKS #START# -->
@@ -29,10 +31,10 @@
       type="text/javascript"
       src="./assets/js/requestanimationframe.polyfill.js"
     ></script>
-  <script type="text/javascript" src="./assets/js/weather.js"></script>
-  <script src="./assets/js/dialog.js"></script>
+    <script type="text/javascript" src="./assets/js/weather.js"></script>
+    <script src="./assets/js/dialog.js"></script>
     <!-- JAVASCRIPT LINKS #END#   -->
-</head>
+  </head>
   <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -76,53 +78,71 @@
               <canvas id="sphere" width="400" height="400"></canvas>
               <div id="glow-shadows" class="earth"></div>
               <div id="locations"></div>
-            </div>        
-  </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="panel panel-primary">
-
-            <div class="panel-heading text-center">Conditions</div>
-
-            <div class="panel-body text-center" id="imageHolder">
-              <img
-                src="https://placehold.it/150x80?text=IMAGE"
-                class="img-responsive"
-                style="width:100%"
-                alt="Image"
-              />
             </div>
-            <div class="panel-footer text-center" id="weatherTemp">Data goes here.</div>
-            <div class="panel-footer text-center" id="time"></div>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="panel panel-primary">
+      </div>
 
-            <div class="panel-heading text-center chatHead">Chatbox</div>
-            <div class="panel-body chatbox"></div>
-            <div class="panel-footer text-center chatbox-data"><div id="dialog-form" title="Create new user">
-              <p class="validateTips">All form fields are required.</p>
-             
-              <form>
-                <fieldset>
-                  <label for="name">Name</label>
-                  <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-                  <label for="email">Email</label>
-                  <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-                  <label for="password">Password</label>
-                  <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
-             
-                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                </fieldset>
-              </form>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading text-center">Conditions</div>
+
+              <div class="panel-body text-center" id="imageHolder">
+                <img
+                  src="https://placehold.it/150x80?text=IMAGE"
+                  class="img-responsive"
+                  style="width:100%"
+                  alt="Image"
+                />
+              </div>
+              <div class="panel-footer text-center" id="weatherTemp">
+                Data goes here.
+              </div>
+              <div class="panel-footer text-center" id="time"></div>
             </div>
-            <button id="create-user">Create new user</button></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading text-center chatHead">Chatbox</div>
+              <div class="panel-body chatbox"></div>
+              <div class="panel-footer text-center chatbox-data">
+                <div id="dialog-form" title="Create new user">
+                  <p class="validateTips">All form fields are required.</p>
+
+                  <form>
+                    <fieldset>
+                      <label for="name">Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="username"
+                        class="text ui-widget-content ui-corner-all"
+                      />
+                      <label for="password">Password</label>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="password"
+                        class="text ui-widget-content ui-corner-all"
+                      />
+
+                      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                      <input
+                        type="submit"
+                        tabindex="-1"
+                        style="position:absolute; top:-1000px"
+                      />
+                    </fieldset>
+                  </form>
+                </div>
+                <button id="login">Login</button>
+              </div>
+              <button id="create-user">Create new user</button>
+            </div>
           </div>
         </div>
       </div>
@@ -146,7 +166,6 @@
       </table>
     </div>
 
-
     <footer class="container-fluid text-center">
       <p>BAMN</p>
     </footer>
@@ -155,6 +174,5 @@
     <script src="./assets/js/firebaseInit.js"></script>
     <script src="./assets/js/chat.js"></script>
     <script src="./assets/js/game.js"></script>
-
   </body>
 </html>
