@@ -16,13 +16,9 @@ $(function() {
     $("#dialog-2").dialog("open");
   });
 });
-var nameBox = $("<input>")
-    .attr({
-      type: "text",
-      id: "nameInput",
-      class: "form-control",
-      placeholder: "enter a username"
-    })
+var currentUser = $("<div>")
+    .attr("class", "current-user")
+    .text(userName)
     .appendTo(".chatHead"),
   chatBox = $("<ul>")
     .attr({
@@ -59,7 +55,7 @@ var messageField = $("#messageInput"),
 
 messageField.on("keypress", function(e) {
   if (e.keyCode === 13) {
-    var username = nameField.val();
+    var username = userName;
     var message = messageField.val();
 
     database.ref("/chat").push({ name: username, text: message });

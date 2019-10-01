@@ -61,32 +61,16 @@ $(function() {
       );
 
     if (valid) {
-      database.ref("/accts").push({ un: name.val(), pw: password.val() });
       userName = name.val();
-      ref
-        .orderByChild("email")
-        .equalTo(userName)
-        .on("value", function(snapshot) {
-          snapshot.forEach(function(child) {
-            console.log(child.key);
-          });
-        });
-      database.ref("/accts").on("child_added", function(snapshot) {
-        var data = snapshot.parent.val();
-        console.log(data);
-        $("#users tbody").append(
-          "<tr>" +
-            "<td>" +
-            name.val() +
-            "</td>" +
-            "<td>" +
-            password.val() +
-            "</td>" +
-            "</tr>"
-        );
+      var accountRef = database.ref("/accts");
+      var userNameRef = database.ref("/accts/un");
+      if (userNameRef.equalTo(userName)) {
+        updateTips("Failed, Account Already Exists!");
+      } else {
+        accountRef.push({ un: name.val(), pw: password.val() });
         dialog.dialog("close");
-      });
-      return valid;
+        return valid;
+      }
     }
   }
 
@@ -110,6 +94,7 @@ $(function() {
   form = dialog.find("form").on("submit", function(event) {
     event.preventDefault();
     addUser();
+    dialog.dialog("close");
   });
 
   $("#create-user")
