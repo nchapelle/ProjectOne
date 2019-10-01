@@ -1,5 +1,9 @@
 function callWeatherAPI(cityName) {
+  //added if condition to eleminat the 404 error on load
   var city = cityName;
+  if (city === undefined) {
+    city = "Newark,DE";
+  }
   console.log(city);
   var APIKey = "6d6f7899a40648fa2d6b5e6e1ddc218f";
   var queryURL =

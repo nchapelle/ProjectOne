@@ -16,13 +16,9 @@ $(function() {
     $("#dialog-2").dialog("open");
   });
 });
-var nameBox = $("<input>")
-    .attr({
-      type: "text",
-      id: "nameInput",
-      class: "form-control",
-      placeholder: "enter a username"
-    })
+var currentUser = $("<div>")
+    .attr("class", "current-user")
+    .text(userName)
     .appendTo(".chatHead"),
   chatBox = $("<ul>")
     .attr({
@@ -49,15 +45,6 @@ var nameBox = $("<input>")
     })
     .appendTo(usersOnline);
 
-var firebaseConfig = {
-  apiKey: "AIzaSyCP2EsdbUYFADOxHdrn3u_fyBpN_Lh8kpY",
-  authDomain: "upbc-projectone.firebaseapp.com",
-  databaseURL: "https://upbc-projectone.firebaseio.com",
-  projectId: "upbc-projectone",
-  storageBucket: "",
-  messagingSenderId: "74907588730",
-  appId: "1:74907588730:web:38a07f740689c06ea283c3"
-};
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
@@ -68,7 +55,7 @@ var messageField = $("#messageInput"),
 
 messageField.on("keypress", function(e) {
   if (e.keyCode === 13) {
-    var username = nameField.val();
+    var username = userName;
     var message = messageField.val();
 
     database.ref("/chat").push({ name: username, text: message });

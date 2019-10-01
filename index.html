@@ -4,54 +4,33 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS LINKS #START# -->
+    <link
+      href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/globe.css" />
+    <!-- CSS LINKS #END# -->
+
+    <!-- JAVASCRIPT LINKS #START# -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-
     <script type="text/javascript" src="./assets/js/sphere-hacked.js"></script>
-    
-    
     <script
       type="text/javascript"
       src="./assets/js/jquery.earth-3d.js"
     ></script>
-    <script type="text/javascript" src="./assets/js/globe.js"></script>
-
     <script
       type="text/javascript"
       src="./assets/js/requestanimationframe.polyfill.js"
     ></script>
-    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-         rel = "stylesheet">
-    <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-  />
-
-  <script type="text/javascript" src="./assets/js/weather.js"></script>
-  <script type="text/javascript" src="./assets/js/time.js"></script>
-
-<link rel="stylesheet" href="./assets/css/globe.css"/>
-    <style>
-      /* Remove the navbar's default rounded borders and increase the bottom margin */
-      .navbar {
-        margin-bottom: 50px;
-        border-radius: 0;
-      }
-
-      /* Remove the jumbotron's default bottom margin */
-      .jumbotron {
-        margin-bottom: 0;
-      }
-
-      /* Add a gray background color and some padding to the footer */
-      footer {
-        background-color: #f2f2f2;
-        padding: 25px;
-      }
-    </style>
+    <!-- JAVASCRIPT LINKS #END#   -->
   </head>
   <body>
     <nav class="navbar navbar-inverse">
@@ -77,7 +56,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#"
+              <a id="account" href="#"
                 ><span class="glyphicon glyphicon-user"></span> Your Account</a
               >
             </li>
@@ -96,85 +75,92 @@
               <canvas id="sphere" width="400" height="400"></canvas>
               <div id="glow-shadows" class="earth"></div>
               <div id="locations"></div>
-            </div>        
-  </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="panel panel-primary">
-
-            <div class="panel-heading text-center">Conditions</div>
-
-            <div class="panel-body text-center" id="imageHolder">
-              <img
-                src="https://placehold.it/150x80?text=IMAGE"
-                class="img-responsive"
-                style="width:100%"
-                alt="Image"
-              />
             </div>
-            <div class="panel-footer text-center" id="weatherTemp">Data goes here.</div>
-            <div class="panel-footer text-center" id="time"></div>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="panel panel-primary">
+      </div>
 
-            <div class="panel-heading text-center chatHead">Chatbox</div>
-            <div class="panel-body chatbox"></div>
-            <div class="panel-footer text-center chatbox-data"><div id="dialog-form" title="Create new user">
-              <p class="validateTips">All form fields are required.</p>
-             
-              <form>
-                <fieldset>
-                  <label for="name">Name</label>
-                  <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-                  <label for="email">Email</label>
-                  <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-                  <label for="password">Password</label>
-                  <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
-             
-                  <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                  <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                </fieldset>
-              </form>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading text-center">Conditions</div>
+
+              <div class="panel-body text-center" id="imageHolder">
+                <img
+                  src="https://placehold.it/150x80?text=IMAGE"
+                  class="img-responsive"
+                  style="width:100%"
+                  alt="Image"
+                />
+              </div>
+              <div class="panel-footer text-center" id="weatherTemp">
+                Data goes here.
+              </div>
+              <div class="panel-footer text-center" id="time"></div>
             </div>
-            <button id="create-user">Create new user</button>
-          <script src="./assets/js/dialog.js"></script></div>
+          </div>
+          <div class="col-sm-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading text-center chatHead">Chatbox</div>
+              <div class="panel-body chatbox"></div>
+              <div class="panel-footer text-center chatbox-data">
+                <div id="dialog-form" title="Create new user">
+                  <p class="validateTips">All form fields are required.</p>
+
+                  <form>
+                    <fieldset>
+                      <label for="name">Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="username"
+                        class="text ui-widget-content ui-corner-all"
+                      />
+                      <label for="password">Password</label>
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="password"
+                        class="text ui-widget-content ui-corner-all"
+                      />
+
+                      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                      <input
+                        type="submit"
+                        tabindex="-1"
+                        style="position:absolute; top:-1000px"
+                      />
+                    </fieldset>
+                  </form>
+                </div>
+                <button id="login">Login</button>
+              </div>
+              <button id="create-user">Create new user</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <br /><br />
-    <div id="users-contain" class="ui-widget">
-      <h1>Existing Users:</h1>
-      <table id="users" class="ui-widget ui-widget-content">
-        <thead>
-          <tr class="ui-widget-header ">
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>John Doe</td>
-            <td>john.doe@example.com</td>
-            <td>johndoe1</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
     <footer class="container-fluid text-center">
       <p>BAMN</p>
     </footer>
-    <script src="./assets/js/chat.js"></script>
-    <script src="./assets/js/game.js"></script>
-
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"
+    ></script>
+    <script type="text/javascript" src="./assets/js/firebaseInit.js"></script>
+    <script type="text/javascript" src="./assets/js/globe.js"></script>
+    <script type="text/javascript" src="./assets/js/weather.js"></script>
+    <script type="text/javascript" src="./assets/js/dialog.js"></script>
+    <script type="text/javascript" src="./assets/js/chat.js"></script>
+    <script type="text/javascript" src="./assets/js/game.js"></script>
   </body>
 </html>
