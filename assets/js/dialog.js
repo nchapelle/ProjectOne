@@ -1,4 +1,4 @@
-var userName;
+var uN, pW, id;
 $(function() {
   var dialog,
     form,
@@ -61,10 +61,16 @@ $(function() {
       );
 
     if (valid) {
-      userName = name.val();
+      uN = name.val();
+      pW = password.val();
       var accountRef = database.ref("/accts");
-      accountRef.push({ un: userName, pw: password.val() });
-      dialog.dialog("close");
+      accountRef.push({ id: 0, uN: uN, pW: pW }).then(result => {
+        id = result.getKey();
+        var keyRef = database.ref("/accts/" + id);
+        keyRef.update({ id: id });
+        console.log("UN: " + uN + " PW: " + pW + " ID: " + id);
+        dialog.dialog("close");
+      });
       return valid;
     }
   }
@@ -89,7 +95,6 @@ $(function() {
   form = dialog.find("form").on("submit", function(event) {
     event.preventDefault();
     addUser();
-    dialog.dialog("close");
   });
 
   $("#create-user")
