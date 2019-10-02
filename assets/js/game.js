@@ -1,9 +1,13 @@
+const gametime = 100;
 var highscore = 15;
 var danger = 0;
-var countdown = 150;
+var countdown = 15;
 var roundScore = 0;
 var intervalId;
 var threat = 1;
+var modeTime = 0;
+var timeLost = 0;
+
 //on load
 var time = {
   run: function() {
@@ -15,7 +19,13 @@ var time = {
   },
   decrement: function() {
     countdown--;
-
+    timeLost++;
+    var dataval = parseInt($('.progress').attr("data-amount"));
+    if (dataval < 100) {
+        $('.progress .amount').css("width", 100 - dataval + "%");
+    }
+  
+    threatMeter(1, timeLost)
     // $(".timer").html("<h2>" + countdown + "</h2>");
     // $(".timer").hide()
     if (countdown === 0) {
@@ -26,19 +36,47 @@ var time = {
       dragonGO.attr("src", dragon.images[1]);
       dragonGO.attr("id", "game-over");
       // $("#dragon").empty();
-      $(".jumbotron").empty();
+      $(".lootBox").empty();
       time.stop();
       roundScore = 0;
       danger = 0;
-      countdown = 15;
-      $(".jumbotron").append(dragonGO);
+      countdown = modeTime;
+      $(".dragonBox").append(dragonGO);
       $("#game-over").on("click", function() {
-        $("#dragon").empty();
-        $(".jumbotron").empty();
-        choices.startGame();
+        // $("#dragon").empty();
+        $(".dragonBox").empty();
+        // choices.startGame();
+        // makeCanvas();
+        $("#detachMe").appendTo(".jumbotron")
       });
     }
   }
+};
+
+  var weatherStart = function() {
+    console.log(weatherTemp);
+ 
+    if (weatherTemp <= 65){
+      
+      modeTime = 60;
+      threat = 1.25;
+      console.log("Threat Modifier: " + threat);
+      choices.lootStart();
+    }
+    else if (weatherTemp >65 || weatherTemp < 80){
+      modeTime = 60;
+      threat = 1;
+      console.log("Threat Modifier: " + threat);
+      choices.lootStart();
+
+    }
+    else {
+      modeTime = 60;
+      threat = .75;
+      console.log("Threat Modifier: " + threat)
+      choices.lootStart();
+
+    }
 };
 var dragon = {
   images: ["assets/img/dragonKnows.gif", "assets/img/gameOver.gif"],
@@ -48,8 +86,9 @@ var dragon = {
     dragonImg.addClass("col");
     dragonImg.attr("src", dragon.images[0]);
     dragonImg.attr("id", "heKnows");
-    $(".jumbotron").append(dragonImg);
+    $(".dragonBox").append(dragonImg);
     $("#heKnows").on("click", function() {
+      $(".dragonBox").empty();
       treasurePile.lootPiles();
     });
   },
@@ -57,12 +96,12 @@ var dragon = {
   checkRound: function() {
     if (roundScore >= 5) {
       time.stop();
-      $("#dragon").empty();
+      // $("#dragon").empty();
       dragon.knows();
       danger++;
       console.log("Round Score: " + roundScore);
       console.log("Danger: " + danger);
-      countdown = 10 - danger;
+      countdown = 150 - danger;
       // $(".timer").html("<h2> checkround: " + countdown + "</h2>"); //to let us know what timer is being called
       time.run();
     }
@@ -72,7 +111,7 @@ var dragon = {
 var choices = {
   goHome: function() {
     var goHome = $("<div>");
-    goHome.addClass("col text-center");
+    goHome.addClass("frank text-center");
     goHome.attr("data-value", "0");
     goHome.attr("id", "cardBG");
     var goHomeImg = $("<img>");
@@ -80,19 +119,19 @@ var choices = {
     goHomeImg.attr("id", "no-game");
     goHomeImg.attr("data-value", "0");
     $(goHome).append(goHomeImg);
-    $(".gameStart").append(goHome);
+    goHome.appendTo(".gameStart")
     $("#no-game").on("click", function() {
       delayButtonAlert = setTimeout(function() {
         alert("You have wasted your opportunity.");
-        $(".jumbotron").empty();
-        choices.startGame();
+        // $(".jumbotron").empty(); why are we emptying here make image a modal?
+        // choices.startGame();
       }, 1000);
     });
   },
 
   lootStart: function() {
     var lootStart = $("<div>");
-    lootStart.addClass("col text-center");
+    lootStart.addClass("frank text-center");
     lootStart.attr("data-value", "1");
     lootStart.attr("id", "cardBG");
     var lootStartImg = $("<img>");
@@ -100,9 +139,9 @@ var choices = {
     lootStartImg.attr("id", "Go-Time");
     lootStartImg.attr("data-value", "1");
     $(lootStart).append(lootStartImg);
-    $(".gameStart").append(lootStart);
+    lootStart.appendTo(".gameStart")
     $("#Go-Time").on("click", function() {
-      $(".jumbotron").empty();
+      $(".frank").empty();
       console.log("Correct Choice, game start!");
       treasurePile.lootPiles();
       $("#modal-button").hide();
@@ -113,11 +152,12 @@ var choices = {
   },
 
   startGame: function() {
-    $(".jumbotron").empty();
+    // $(".jumbotron").empty(); here we detach instead
+    $("#detachMe").detach();
     var gameStart = $("<div>");
     gameStart.addClass("gameStart");
     $(".jumbotron").append(gameStart);
-    choices.goHome();
+    // choices.goHome();
     choices.lootStart();
     // console.log("Need better styling")
   }
@@ -139,18 +179,14 @@ var treasurePile = {
     "Jewelry fit for royalty."
   ],
   action: ["Leave", "Min Gain", "Med Gain", "Max Gain"],
-  aggravation: [0, 0.05, 0.1, 0.2],
+  aggravation: [0, 0.05, 0.1, 0.2], 
   lootPiles: function() {
-    var lootBox = $("<div>");
-    lootBox.addClass("lootBox");
     for (var i = 0; i < treasurePile.images.length; i++) {
       var x = [Math.floor(Math.random() * 4)];
 
       // lootBox.addClass("col-xs-12 col-med-6 col-lg-3");
       var lootCard = $("<div>");
       lootCard.addClass("card text-center");
-      $(lootBox).append(lootCard);
-      $(".jumbotron").append(lootBox);
 
       var lootImg = $("<img>");
       lootImg.addClass("card-image-top-center");
@@ -176,12 +212,15 @@ var treasurePile = {
       bodyBtn.text(treasurePile.action[x]);
       $(lootBody).append(bodyH5, bodyText, bodyBtn);
       $(lootCard).append(lootBody);
+      $(".lootBox").append(lootCard);
+
     }
     $(".btn").on("click", function() {
-      var treasureValue = $(this).attr("data-value"); //something is wrong with this function, I believe that values are not being read properly it could be the if/else arguments.
+      var treasureValue = $(this).attr("data-value"); 
       treasureValue = parseInt(treasureValue);
       roundScore += treasureValue;
       console.log("Treasure Value: " + treasureValue);
+      $("#dragonBox").empty();
 
       if (treasureValue === 0) {
         console.log("Cave Entrance Clicked.");
@@ -195,10 +234,13 @@ var treasurePile = {
             alert(
               "New High Score. Take a Screenshot! High Score: " + highscore
             );
-            $(".jumbotron").empty();
+            $(".lootBox").empty();
+            // $(".jumbotron").empty();
             // $("#dragon").empty();
             roundScore = 0;
-            choices.startGame();
+            // choices.startGame();
+            // makeCanvas();
+            $("#detachMe").appendTo(".jumbotron")
           }, 100);
           // $("#highscore").text("High Score: " + highscore)
           //change to local storage
@@ -211,17 +253,18 @@ var treasurePile = {
           danger = 0;
           $("#modal-button").show();
 
-          // choices.startGame(); //this is now buried within the scope of the second click event
         } else {
           delayButtonAlert = setTimeout(function() {
-            alert(
-              "You escaped with your treasures. Your score is: " + roundScore
-            );
-            $(".jumbotron").empty();
-            $("#dragon").empty();
-            roundScore = 0;
-            choices.startGame();
-            // choices.startGame(); //this is now buried within the scope of the second click event
+              alert(
+                "You escaped with your treasures. Your score is: " + roundScore
+              );
+              $(".lootBox").empty();
+              $("#dragon").empty();
+              roundScore = 0;
+              // choices.startGame();
+              // makeCanvas();
+              $("#detachMe").appendTo(".jumbotron");
+
           }, 100);
           time.stop();
           countdown = 15;
@@ -230,11 +273,12 @@ var treasurePile = {
         }
       } else if (treasureValue === 5) {
         console.log("Greedy.");
-        danger++;
+        threat += .20;
         time.stop();
         dragon.checkRound();
         time.decrement();
       } else {
+        threat += .05;
         if (roundScore > 10) {
           time.stop();
           dragon.checkRound();
@@ -245,8 +289,8 @@ var treasurePile = {
           console.log("You sneaky bastard.");
         }
       }
-      $(".jumbotron").empty();
-      treasurePile.lootPiles();
+      $(".lootBox").empty();
+      // treasurePile.lootPiles();
     });
   },
 
@@ -258,11 +302,52 @@ var treasurePile = {
 };
 
 // (onLoad = choices.startGame()),
-$(document).ready(function() {
-  $("#exampleModalCenter").modal();
-  $("#highScore").text("High Score: " + localStorage.getItem("highscore"));
+//   var highScorefunction() {
+//   $("#exampleModalCenter").modal();
+//   $("#highScore").text("High Score: " + localStorage.getItem("highscore"));
 
-  // dragon.countdown();
+//   // dragon.countdown();
 
-  // choices.startGame();
-});
+//   // choices.startGame();
+// };
+  function threatMeter(type, threatBar) {
+      dataval = parseInt($('.progress').attr("data-amount"));
+      if (type == 1) dataval = Math.min(100,dataval + threatBar)
+      else if (type == -1) dataval = Math.max(0,dataval - threatBar);
+      $('.progress .amount').css("width", 100 - dataval + "%");
+      $('.progress').attr("data-amount", dataval);
+  }
+
+
+const makeCanvas = function(){
+  const container1 = $("<div>");
+  container1.addClass("container text-center");
+  const globe = $("<div>");
+  globe.addClass("globe");
+  const showoff = $("<div>");
+  showoff.attr("id", "showoff");
+  const container2 = $("<div>");
+  container2.addClass("container") //text center?
+  const canvas = $("<canvas>");
+  canvas.attr("id", "sphere");
+  canvas.attr("width", "400");
+  canvas.attr("height", "400");
+  const shadows = $("<div>");
+  shadows.addClass("earth")
+  shadows.attr("id", "glow-shadows")
+  const locationHolder = $("<div>")
+  locationHolder.attr("id", "locations")
+  $(".jumbotron").append(container1)
+  $(container1).append(globe);
+  $(globe).append(showoff);
+  $(showoff).append(container2);
+  $(container2).append(canvas);
+  $(canvas).append(shadows);
+  $(shadows).append(locationHolder);
+  $("#sphere").earth3d({
+    locationsElement: $("#locations"),
+    dragElement: $("#locations"), // where do we catch the mouse drag
+    locations: locations
+  });
+
+}

@@ -1,3 +1,5 @@
+var weatherTemp = 0
+
 function callWeatherAPI(cityName) {
   //added if condition to eleminat the 404 error on load
   var city = cityName;
@@ -15,7 +17,8 @@ function callWeatherAPI(cityName) {
     url: queryURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response.main.temp);
+    weatherTemp= response.main.temp;
+    console.log("Temperature: " + response.main.temp);
     $("#weatherTemp").html("<p>" + city + " " + response.main.temp + "°F </p>");
     var weather = response.weather[0].main;
     console.log(weather);
