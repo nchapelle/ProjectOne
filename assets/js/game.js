@@ -20,18 +20,16 @@ var time = {
   decrement: function() {
     countdown--;
     timeLost++;
-    var dataval = parseInt($('.progress').attr("data-amount"));
+    var dataval = parseInt($(".progress").attr("data-amount"));
     if (dataval < 100) {
-        $('.progress .amount').css("width", 100 - dataval + "%");
+      $(".progress .amount").css("width", 100 - dataval + "%");
     }
-  
-    threatMeter(1, timeLost)
+
+    threatMeter(1, timeLost);
     // $(".timer").html("<h2>" + countdown + "</h2>");
     // $(".timer").hide()
     if (countdown === 0) {
       time.stop();
-
-      alert("Time Up!");
       var dragonGO = $("<img>");
       dragonGO.attr("src", dragon.images[1]);
       dragonGO.attr("id", "game-over");
@@ -40,43 +38,38 @@ var time = {
       time.stop();
       roundScore = 0;
       danger = 0;
-      countdown = modeTime;
+      timeLost = 0;
       $(".dragonBox").append(dragonGO);
       $("#game-over").on("click", function() {
         // $("#dragon").empty();
         $(".dragonBox").empty();
         // choices.startGame();
         // makeCanvas();
-        $("#detachMe").appendTo(".jumbotron")
+        $("#detachMe").appendTo(".jumbotron");
       });
     }
   }
 };
 
-  var weatherStart = function() {
-    console.log(weatherTemp);
- 
-    if (weatherTemp <= 65){
-      
-      modeTime = 60;
-      threat = 1.25;
-      console.log("Threat Modifier: " + threat);
-      choices.lootStart();
-    }
-    else if (weatherTemp >65 || weatherTemp < 80){
-      modeTime = 60;
-      threat = 1;
-      console.log("Threat Modifier: " + threat);
-      choices.lootStart();
+var weatherStart = function() {
+  console.log(weatherTemp);
 
-    }
-    else {
-      modeTime = 60;
-      threat = .75;
-      console.log("Threat Modifier: " + threat)
-      choices.lootStart();
-
-    }
+  if (weatherTemp <= 65) {
+    modeTime = 60;
+    threat = 1.25;
+    console.log("Threat Modifier: " + threat);
+    choices.lootStart();
+  } else if (weatherTemp > 65 || weatherTemp < 80) {
+    modeTime = 60;
+    threat = 1;
+    console.log("Threat Modifier: " + threat);
+    choices.lootStart();
+  } else {
+    modeTime = 60;
+    threat = 0.75;
+    console.log("Threat Modifier: " + threat);
+    choices.lootStart();
+  }
 };
 var dragon = {
   images: ["assets/img/dragonKnows.gif", "assets/img/gameOver.gif"],
@@ -94,14 +87,14 @@ var dragon = {
   },
 
   checkRound: function() {
-    if (roundScore >= 5) {
+    if (roundScore >= 1) {
       time.stop();
       // $("#dragon").empty();
       dragon.knows();
       danger++;
       console.log("Round Score: " + roundScore);
       console.log("Danger: " + danger);
-      countdown = 150 - danger;
+      // countdown = 15 - danger;
       // $(".timer").html("<h2> checkround: " + countdown + "</h2>"); //to let us know what timer is being called
       time.run();
     }
@@ -119,7 +112,7 @@ var choices = {
     goHomeImg.attr("id", "no-game");
     goHomeImg.attr("data-value", "0");
     $(goHome).append(goHomeImg);
-    goHome.appendTo(".gameStart")
+    goHome.appendTo(".gameStart");
     $("#no-game").on("click", function() {
       delayButtonAlert = setTimeout(function() {
         alert("You have wasted your opportunity.");
@@ -139,7 +132,7 @@ var choices = {
     lootStartImg.attr("id", "Go-Time");
     lootStartImg.attr("data-value", "1");
     $(lootStart).append(lootStartImg);
-    lootStart.appendTo(".gameStart")
+    lootStart.appendTo(".gameStart");
     $("#Go-Time").on("click", function() {
       $(".frank").empty();
       console.log("Correct Choice, game start!");
@@ -179,7 +172,7 @@ var treasurePile = {
     "Jewelry fit for royalty."
   ],
   action: ["Leave", "Min Gain", "Med Gain", "Max Gain"],
-  aggravation: [0, 0.05, 0.1, 0.2], 
+  aggravation: [0, 0.05, 0.1, 0.2],
   lootPiles: function() {
     for (var i = 0; i < treasurePile.images.length; i++) {
       var x = [Math.floor(Math.random() * 4)];
@@ -213,10 +206,9 @@ var treasurePile = {
       $(lootBody).append(bodyH5, bodyText, bodyBtn);
       $(lootCard).append(lootBody);
       $(".lootBox").append(lootCard);
-
     }
     $(".btn").on("click", function() {
-      var treasureValue = $(this).attr("data-value"); 
+      var treasureValue = $(this).attr("data-value");
       treasureValue = parseInt(treasureValue);
       roundScore += treasureValue;
       console.log("Treasure Value: " + treasureValue);
@@ -240,7 +232,7 @@ var treasurePile = {
             roundScore = 0;
             // choices.startGame();
             // makeCanvas();
-            $("#detachMe").appendTo(".jumbotron")
+            $("#detachMe").appendTo(".jumbotron");
           }, 100);
           // $("#highscore").text("High Score: " + highscore)
           //change to local storage
@@ -252,19 +244,17 @@ var treasurePile = {
           countdown = 15;
           danger = 0;
           $("#modal-button").show();
-
         } else {
           delayButtonAlert = setTimeout(function() {
-              alert(
-                "You escaped with your treasures. Your score is: " + roundScore
-              );
-              $(".lootBox").empty();
-              $("#dragon").empty();
-              roundScore = 0;
-              // choices.startGame();
-              // makeCanvas();
-              $("#detachMe").appendTo(".jumbotron");
-
+            alert(
+              "You escaped with your treasures. Your score is: " + roundScore
+            );
+            $(".lootBox").empty();
+            $("#dragon").empty();
+            roundScore = 0;
+            // choices.startGame();
+            // makeCanvas();
+            $("#detachMe").appendTo(".jumbotron");
           }, 100);
           time.stop();
           countdown = 15;
@@ -273,12 +263,14 @@ var treasurePile = {
         }
       } else if (treasureValue === 5) {
         console.log("Greedy.");
-        threat += .20;
+        threat += 0.2;
+        timeLost -= 5;
         time.stop();
         dragon.checkRound();
         time.decrement();
       } else {
-        threat += .05;
+        threat += 0.05;
+        timeLost -= 10;
         if (roundScore > 10) {
           time.stop();
           dragon.checkRound();
@@ -289,6 +281,8 @@ var treasurePile = {
           console.log("You sneaky bastard.");
         }
       }
+      timeLost = 0;
+
       $(".lootBox").empty();
       // treasurePile.lootPiles();
     });
@@ -310,16 +304,15 @@ var treasurePile = {
 
 //   // choices.startGame();
 // };
-  function threatMeter(type, threatBar) {
-      dataval = parseInt($('.progress').attr("data-amount"));
-      if (type == 1) dataval = Math.min(100,dataval + threatBar)
-      else if (type == -1) dataval = Math.max(0,dataval - threatBar);
-      $('.progress .amount').css("width", 100 - dataval + "%");
-      $('.progress').attr("data-amount", dataval);
-  }
+function threatMeter(type, threatBar) {
+  dataval = parseInt($(".progress").attr("data-amount"));
+  if (type == 1) dataval = Math.min(100, dataval + threatBar);
+  else if (type == -1) dataval = Math.max(0, dataval - threatBar);
+  $(".progress .amount").css("width", 100 - dataval + "%");
+  $(".progress").attr("data-amount", dataval);
+}
 
-
-const makeCanvas = function(){
+const makeCanvas = function() {
   const container1 = $("<div>");
   container1.addClass("container text-center");
   const globe = $("<div>");
@@ -327,17 +320,17 @@ const makeCanvas = function(){
   const showoff = $("<div>");
   showoff.attr("id", "showoff");
   const container2 = $("<div>");
-  container2.addClass("container") //text center?
+  container2.addClass("container"); //text center?
   const canvas = $("<canvas>");
   canvas.attr("id", "sphere");
   canvas.attr("width", "400");
   canvas.attr("height", "400");
   const shadows = $("<div>");
-  shadows.addClass("earth")
-  shadows.attr("id", "glow-shadows")
-  const locationHolder = $("<div>")
-  locationHolder.attr("id", "locations")
-  $(".jumbotron").append(container1)
+  shadows.addClass("earth");
+  shadows.attr("id", "glow-shadows");
+  const locationHolder = $("<div>");
+  locationHolder.attr("id", "locations");
+  $(".jumbotron").append(container1);
   $(container1).append(globe);
   $(globe).append(showoff);
   $(showoff).append(container2);
@@ -349,5 +342,4 @@ const makeCanvas = function(){
     dragElement: $("#locations"), // where do we catch the mouse drag
     locations: locations
   });
-
-}
+};

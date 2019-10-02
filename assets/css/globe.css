@@ -10,6 +10,7 @@ input.text {
   width: 95%;
   padding: 0.4em;
 }
+
 fieldset {
   padding: 0;
   border: 0;
@@ -109,9 +110,9 @@ div#users-contain table th {
   margin-top: -7.5px;
 }
 #lootPics {
-  padding: 30px;
-  width: 300px;
-  height: 300px;
+  padding: 3px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   align-self: center;
 }
@@ -119,8 +120,8 @@ div#users-contain table th {
 #no-game,
 #Go-Time {
   padding: 10px;
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
   align-self: center;
 }
@@ -163,12 +164,38 @@ div#users-contain table th {
   position: relative;
   height: 31px;
   background: rgb(255, 0, 0);
-  background: -moz-linear-gradient(left, rgba(0, 255, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 255, 0, 1)), color-stop(100%, rgba(255, 0, 0, 1)));
-  background: -webkit-linear-gradient(left, rgba(0, 255, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
-  background: -o-linear-gradient(left, rgba(0, 255, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
-  background: -ms-linear-gradient(left, rgba(0, 255, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
-  background: linear-gradient(to right, rgba(0, 255, 0, 1) 0%, rgba(255, 0, 0, 1) 100%);
+  background: -moz-linear-gradient(
+    left,
+    rgba(0, 255, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0%, rgba(0, 255, 0, 1)),
+    color-stop(100%, rgba(255, 0, 0, 1))
+  );
+  background: -webkit-linear-gradient(
+    left,
+    rgba(0, 255, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 100%
+  );
+  background: -o-linear-gradient(
+    left,
+    rgba(0, 255, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    left,
+    rgba(0, 255, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(0, 255, 0, 1) 0%,
+    rgba(255, 0, 0, 1) 100%
+  );
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff0000', endColorstr='#00ff00', GradientType=1);
 }
 .amount {
@@ -181,7 +208,7 @@ div#users-contain table th {
   width: 0;
 }
 .progress:before {
-  content: attr(data-amount)"% Complete";
+  content: attr(data-amount) "% Complete";
   position: absolute;
   top: 0;
   left: 0;
