@@ -18,7 +18,7 @@ $(function() {
 });
 var currentUser = $("<div>")
     .attr("class", "current-user")
-    .text(userName)
+    .text(uN)
     .appendTo(".chatHead"),
   chatBox = $("<ul>")
     .attr({
@@ -55,7 +55,7 @@ var messageField = $("#messageInput"),
 
 messageField.on("keypress", function(e) {
   if (e.keyCode === 13) {
-    var username = userName;
+    var username = uN;
     var message = messageField.val();
 
     database.ref("/chat").push({ name: username, text: message });
