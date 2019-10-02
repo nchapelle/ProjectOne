@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Bootstrap Example</title>
+    <title>Dragon's Hoarde</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -18,6 +18,7 @@
     <!-- CSS LINKS #END# -->
 
     <!-- JAVASCRIPT LINKS #START# -->
+    <script type="text/javascript" src="./assets/js/game.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -64,8 +65,17 @@
         </div>
       </div>
     </nav>
+    <div class="progress" data-amount="0">
+        <div class="amount"></div>
+      </div>
+  
     <div class="jumbotron">
-      <div class="container text-center">
+      <div class="text-center"><div class="lootBox"></div></div>
+      <div class="text-center"><div class="dragonBox"></div></div>
+      <div class="text-center"><div class="gameStart"></div></div>
+      <div class="text-center"><div class="proofNoEmpty"></div></div>
+
+      <div class="container text-center" id="detachMe">
         <h1>Dragon's Hoarde</h1>
         <p>Get Money, Stay Alive</p>
         <p>Pick your final resting place</p>
@@ -161,6 +171,5 @@
     <script type="text/javascript" src="./assets/js/weather.js"></script>
     <script type="text/javascript" src="./assets/js/dialog.js"></script>
     <script type="text/javascript" src="./assets/js/chat.js"></script>
-    <script type="text/javascript" src="./assets/js/game.js"></script>
   </body>
 </html>
