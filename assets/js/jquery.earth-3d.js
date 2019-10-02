@@ -170,13 +170,12 @@ var earth3d;
         var $elem = $('<div class="location"></div>');
         $elem.appendTo(widget.options.locationsElement);
         $elem.click(function() {
-            // alert("Clicked on " + location.name);
+          // alert("Clicked on " + location.name);
           callWeatherAPI(location.name);
           console.log(location.name);
-          setTimeout(function(){
+          setTimeout(function() {
             weatherStart();
-          }, 2500)
-          
+          }, 2500);
         });
         location.$element = $elem;
       },
