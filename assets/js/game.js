@@ -33,7 +33,7 @@ var time = {
       countdown = 15;
       $(".jumbotron").append(dragonGO);
       $("#game-over").on("click", function() {
-        $("#dragon").empty();
+        // $("#dragon").empty();
         $(".jumbotron").empty();
         choices.startGame();
       });
@@ -57,12 +57,12 @@ var dragon = {
   checkRound: function() {
     if (roundScore >= 5) {
       time.stop();
-      $("#dragon").empty();
+      // $("#dragon").empty();
       dragon.knows();
       danger++;
       console.log("Round Score: " + roundScore);
       console.log("Danger: " + danger);
-      countdown = 10 - danger;
+      countdown = 150 - danger;
       // $(".timer").html("<h2> checkround: " + countdown + "</h2>"); //to let us know what timer is being called
       time.run();
     }
