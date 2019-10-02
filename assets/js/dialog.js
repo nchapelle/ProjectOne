@@ -1,4 +1,5 @@
-var userName;
+var uN, pW, id;
+
 $(function() {
   var dialog,
     form,
@@ -61,12 +62,42 @@ $(function() {
       );
 
     if (valid) {
-      userName = name.val();
-      var accountRef = database.ref("/accts");
-      accountRef.push({ un: userName, pw: password.val() });
-      dialog.dialog("close");
-      return valid;
+      debugger;
+      var userKeys = [];
+      uN = name.val();
+      pW = password;
+      var acctsRef = database.ref("/accts");
+      var acctsKeys = acctsRef.orderByKey();
+      acctsKeys.once("value", snapshot => {
+        snapshot.forEach(childSnapshot => {
+          var key = childSnapshot.key;
+          userKeys.push(childSnapshot.val());
+          console.log(key);
+          console.log("1. " + userKeys);
+        });
+        for (var i = 0; i < userKeys.length; i++) {
+          if (userKeys[i].uN === uN) {
+            console.log("User exists!");
+            if (userKeys[i].pW === pW) {
+              console.log("Logged in!");
+              dialog.dialog("close");
+            } else {
+              console.log("Wrong Password!");
+            }
+          } else {
+            acctsRef.push({ id: 0, uN: uN, pW: pW }).then(result => {
+              id = result.getKey();
+              var keyRef = database.ref("/accts/" + id);
+              keyRef.update({ id: id });
+              console.log("UN: " + uN + " PW: " + pW + " ID: " + id);
+              dialog.dialog("close");
+              console.log("2. " + userKeys);
+            });
+          }
+        }
+      });
     }
+    return valid;
   }
 
   dialog = $("#dialog-form").dialog({
